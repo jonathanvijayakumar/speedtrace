@@ -14,6 +14,11 @@ Multiple XLSX files may be added to the project for reading requirements:
 # Reader Object
 RequirementsReader may be instantiated as the user wishes and is not a singleton. Hence many instances of the reader may be maintained (for whatever reason)!
 
+# Configuration in JSON
+JSON can be used to specify where in excel workbooks the tool can find requirements. Once config is loaded files can be read repeatedly, even when it's changed. 
+
+Check data.json for a sample configuration
+
 # Info
 This app can be used along with your java source and can also be used standalone. The standalone feature is yet to be written.
 Refer the class SpeedTraceHome for an example of how the app can be used via API.
