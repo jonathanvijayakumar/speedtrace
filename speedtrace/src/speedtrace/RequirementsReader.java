@@ -47,7 +47,7 @@ public class RequirementsReader implements IExcelReader {
 	}
 
 	@Override
-	public String createReader() {
+	public void createReader() {
 
 		try {
 			listOfCells.clear();
@@ -61,28 +61,47 @@ public class RequirementsReader implements IExcelReader {
 				XSSFWorkbook workbook = new XSSFWorkbook(fileStream);
 				List<ExcelSheetData> excelData = excelColumnData.get(file.getAbsolutePath());
 
-				for (ExcelSheetData excelSheetData : excelData) {
-					Sheet sheet = workbook.getSheet(excelSheetData.getSheetName());
-
-					for (int rowNum = excelSheetData.getRowNum(); rowNum < sheet.getPhysicalNumberOfRows(); rowNum++) {
-						Row row = sheet.getRow(rowNum);
-						if (row == null)
-							continue;
-
-						Cell cell = row.getCell(excelSheetData.getColNum());
-						if (cell == null)
-							continue;
-
-						listOfCells.add(cell);
-					}
-				}
+				loadSheetData(workbook, excelData);
 			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+	}
+
+	/**
+	 * To load sheet data, this function in turn loads cell data.
+	 * 
+	 * @param workbook
+	 * @param excelData
+	 */
+	private void loadSheetData(XSSFWorkbook workbook, List<ExcelSheetData> excelData) {
+		for (ExcelSheetData excelSheetData : excelData) {
+			Sheet sheet = workbook.getSheet(excelSheetData.getSheetName());
+
+			loadCellData(excelSheetData, sheet);
+		}
+	}
+
+	/**
+	 * Function loads cell data, where the requirements data is actually present
+	 * 
+	 * @param excelSheetData
+	 * @param sheet
+	 */
+	private void loadCellData(ExcelSheetData excelSheetData, Sheet sheet) {
+		for (int rowNum = excelSheetData.getRowNum(); rowNum < sheet.getPhysicalNumberOfRows(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row == null)
+				continue;
+
+			Cell cell = row.getCell(excelSheetData.getColNum());
+			if (cell == null)
+				continue;
+
+			listOfCells.add(cell);
+		}
 	}
 
 	@Override
@@ -90,7 +109,7 @@ public class RequirementsReader implements IExcelReader {
 
 		List<String> listAsString = new ArrayList<String>();
 		requirementsList.clear();
-		
+
 		for (Cell cell : listOfCells) {
 			String cellValue = cell.getStringCellValue();
 
@@ -100,7 +119,7 @@ public class RequirementsReader implements IExcelReader {
 				requirementsList.add(new Requirement(validatedString));
 			}
 		}
-		
+
 		for (Requirement requirement : requirementsList) {
 			listAsString.add(requirement.getID());
 		}
@@ -112,18 +131,6 @@ public class RequirementsReader implements IExcelReader {
 	public void close() {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public FileInputStream open(File fileObject) {
-		FileInputStream stream = null;
-
-		try {
-			stream = new FileInputStream(fileObject);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return stream;
 	}
 
 	@Override

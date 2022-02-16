@@ -5,6 +5,7 @@ package speedtrace.readers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface IFileReader {
 	 * 
 	 * @return
 	 */
-	public String createReader();
+	public void createReader();
 
 	/**
 	 * closes the file reading handle
@@ -36,6 +37,15 @@ public interface IFileReader {
 	 * @param file
 	 * @return
 	 */
-	FileInputStream open(File file);
+	default FileInputStream open(File file) {
+		FileInputStream stream = null;
+
+		try {
+			stream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return stream;
+	}
 
 }

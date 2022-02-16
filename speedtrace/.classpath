@@ -54,5 +54,6 @@
 	<classpathentry kind="lib" path="C:/Personal Files/Jonathan/Work/github/traceability/speedtrace/speedtrace/libraries/xmlbeans-5.0.3.jar"/>
 	<classpathentry kind="lib" path="C:/Personal Files/Jonathan/Work/github/traceability/speedtrace/speedtrace/libraries/xmlgraphics-commons-2.6.jar"/>
 	<classpathentry kind="lib" path="C:/Personal Files/Jonathan/Work/github/traceability/speedtrace/speedtrace/libraries/xmlsec-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Personal Files/Jonathan/Work/github/traceability/speedtrace/speedtrace/libraries/json-20211205.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
