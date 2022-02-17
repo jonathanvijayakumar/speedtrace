@@ -11,11 +11,14 @@ Multiple XLSX files may be added to the project for reading requirements:
 - addColumnData() can be used to set the columns to be read. Multiple sheets may be read in a single file. Row and column numbers start at 0.
 - setRegexsForValidation() Multiple requirements formats may be read at a time, for every format a regex string is to be provided, as a list of strings containing all the regex strings.
 
+Design files can now be loaded and read, currently supported files types are EA designs. Before running the app, copy the dll files from libraries > EA Java API into your system 'PATH'. Copy the 64bit version is your system is a x86_64 system.
+
 # Reader Object
 RequirementsReader may be instantiated as the user wishes and is not a singleton. Hence many instances of the reader may be maintained (for whatever reason)!
 
 # Configuration in JSON
-JSON can be used to specify where in excel workbooks the tool can find requirements. Once config is loaded files can be read repeatedly, even when it's changed. 
+JSON can be used to specify requirements specification and design meta data like paths and columns.
+Once config is loaded files can be read repeatedly, even when it's changed. 
 
 Check data.json for a sample configuration
 
