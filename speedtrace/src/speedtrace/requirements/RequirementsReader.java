@@ -1,15 +1,16 @@
 /**
  * 
  */
-package speedtrace;
+package speedtrace.requirements;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -105,9 +106,9 @@ public class RequirementsReader implements IExcelReader {
 	}
 
 	@Override
-	public List<String> readRequirements() {
+	public Set<String> readRequirements() {
 
-		List<String> listAsString = new ArrayList<String>();
+		Set<String> listAsString = new HashSet<String>();
 		requirementsList.clear();
 
 		for (Cell cell : listOfCells) {
@@ -133,29 +134,29 @@ public class RequirementsReader implements IExcelReader {
 
 	}
 
-	@Override
-	public void addFiles(List<String> filesAsStrings) {
+//	@Override
+//	public void addFiles(List<String> filesAsStrings) {
+//
+//		for (String file : filesAsStrings) {
+//			File fileObject = new File(file);
+//			if (fileObject.exists() && !fileObject.isDirectory()) {
+//				files.add(fileObject);
+//			}
+//		}
+//	}
 
-		for (String file : filesAsStrings) {
-			File fileObject = new File(file);
-			if (fileObject.exists() && !fileObject.isDirectory()) {
-				files.add(fileObject);
-			}
-		}
-	}
-
-	@Override
-	public void setFiles(List<String> filesAsStrings) {
-
-		files.clear();
-
-		for (String file : filesAsStrings) {
-			File fileObject = new File(file);
-			if (fileObject.exists() && !fileObject.isDirectory()) {
-				files.add(fileObject);
-			}
-		}
-	}
+//	@Override
+//	public void setFiles(List<String> filesAsStrings) {
+//
+//		files.clear();
+//
+//		for (String file : filesAsStrings) {
+//			File fileObject = new File(file);
+//			if (fileObject.exists() && !fileObject.isDirectory()) {
+//				files.add(fileObject);
+//			}
+//		}
+//	}
 
 	@Override
 	public void clearColumnData() {
@@ -170,6 +171,8 @@ public class RequirementsReader implements IExcelReader {
 
 		List<ExcelSheetData> excelDataList = excelColumnData.get(filePath);
 		excelDataList.add(new ExcelSheetData(sheetName, rowName, colName));
+
+		files.add(new File(filePath));
 	}
 
 	@Override
@@ -191,6 +194,19 @@ public class RequirementsReader implements IExcelReader {
 		}
 
 		return "";
+	}
+
+	@Override
+	public void open(String file) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * @return the validationRegex
+	 */
+	public List<String> getValidationRegex() {
+		return validationRegex;
 	}
 
 	/**

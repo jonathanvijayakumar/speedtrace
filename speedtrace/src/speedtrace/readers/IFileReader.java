@@ -6,8 +6,8 @@ package speedtrace.readers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author jonathanvijayakumar
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface IFileReader {
 
-	List<File> files = new ArrayList<File>();
+	Set<File> files = new HashSet<File>();
 
 	/**
 	 * Creates a file reader, FileInputStream to be used as an input stream for
@@ -47,5 +47,7 @@ public interface IFileReader {
 		}
 		return stream;
 	}
+
+	public void open(String file);
 
 }

@@ -1,15 +1,13 @@
 /**
  * 
  */
-package speedtrace;
+package speedtrace.readers;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
-
-import speedtrace.readers.IFileReader;
 
 /**
  * @author jonathanvijayakumar
@@ -57,6 +55,12 @@ public class FileReader implements IFileReader {
 	public void close() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void open(String file) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

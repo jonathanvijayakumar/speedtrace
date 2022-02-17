@@ -4,6 +4,7 @@
 package speedtrace.readers;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author jonathanvijayakumar
@@ -12,14 +13,14 @@ import java.util.List;
  */
 public interface IExcelReader extends IFileReader {
 
-	/**
-	 * To add files to be read, files where one may find requirements
-	 * 
-	 * @param files
-	 */
-	public void addFiles(List<String> files);
-	
-	public void setFiles(List<String> files);
+//	/**
+//	 * To add files to be read, files where one may find requirements
+//	 * 
+//	 * @param files
+//	 */
+//	public void addFiles(List<String> files);
+//	
+//	public void setFiles(List<String> files);
 
 	/**
 	 * To add a column where requirements are found, no file existence check done
@@ -42,7 +43,7 @@ public interface IExcelReader extends IFileReader {
 	 * 
 	 * @return
 	 */
-	public List<String> readRequirements();
+	public Set<String> readRequirements();
 
 	/**
 	 * If this is set, each requirement read would be validated against this regex

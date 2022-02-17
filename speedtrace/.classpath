@@ -6,6 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Personal Files/Jonathan/Work/github/traceability/speedtrace/speedtrace/libraries/eaapi.jar"/>
 	<classpathentry kind="lib" path="C:/Personal Files/Jonathan/Work/github/traceability/speedtrace/speedtrace/libraries/batik-anim-1.14.jar"/>
 	<classpathentry kind="lib" path="C:/Personal Files/Jonathan/Work/github/traceability/speedtrace/speedtrace/libraries/batik-awt-util-1.14.jar"/>
 	<classpathentry kind="lib" path="C:/Personal Files/Jonathan/Work/github/traceability/speedtrace/speedtrace/libraries/batik-bridge-1.14.jar"/>

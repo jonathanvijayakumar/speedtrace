@@ -35,5 +35,6 @@
     "ID\\_\\d+",
     "ID\\_BS\\_\\d+",
     "ID\\_EC\\_\\d+"
-  ]
+  ],
+  "design": "C:\\Personal Files\\Jonathan\\Work\\github\\traceability\\speedtrace\\speedtrace\\test-data\\design.eapx"
 }
