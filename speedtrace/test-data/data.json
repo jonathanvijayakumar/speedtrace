@@ -1,40 +1,51 @@
 {
-  "files": [
-    {
-      "path": "C:\\Personal Files\\Jonathan\\Work\\github\\traceability\\speedtrace\\speedtrace\\test-data\\test.xlsx",
-      "data": [
-        {
-          "sheet_name": "headLamp",
-          "row_num": 1,
-          "col_num": 1
-        },
-        {
-          "sheet_name": "tailLamp",
-          "row_num": 1,
-          "col_num": 1
-        }
-      ]
-    },
-    {
-      "path": "C:\\Personal Files\\Jonathan\\Work\\github\\traceability\\speedtrace\\speedtrace\\test-data\\test_sheet_two.xlsx",
-      "data": [
-        {
-          "sheet_name": "engineCooling",
-          "row_num": 1,
-          "col_num": 1
-        },
-        {
-          "sheet_name": "batterySystem",
-          "row_num": 1,
-          "col_num": 1
-        }
-      ]
-    }
-  ],
-  "regex": [
-    "ID\\_\\d+",
-    "ID\\_BS\\_\\d+",
-    "ID\\_EC\\_\\d+"
-  ],
-  "design": "C:\\Personal Files\\Jonathan\\Work\\github\\traceability\\speedtrace\\speedtrace\\test-data\\design.eapx"
+	"files": [
+		{
+			"path": "C:\\Personal Files\\Jonathan\\Work\\github\\traceability\\speedtrace\\speedtrace\\test-data\\test.xlsx",
+			"data": [
+				{
+					"sheet_name": "headLamp",
+					"row_num": 1,
+					"col_num": 1
+				},
+				{
+					"sheet_name": "tailLamp",
+					"row_num": 1,
+					"col_num": 1
+				}
+			]
+		},
+		{
+			"path": "C:\\Personal Files\\Jonathan\\Work\\github\\traceability\\speedtrace\\speedtrace\\test-data\\test_sheet_two.xlsx",
+			"data": [
+				{
+					"sheet_name": "engineCooling",
+					"row_num": 1,
+					"col_num": 1
+				},
+				{
+					"sheet_name": "batterySystem",
+					"row_num": 1,
+					"col_num": 1
+				}
+			]
+		}
+	],
+	"regex": [
+		"ID\\_\\d+",
+		"ID\\_BS\\_\\d+",
+		"ID\\_EC\\_\\d+"
+	],
+	"design": "C:\\Personal Files\\Jonathan\\Work\\github\\traceability\\speedtrace\\speedtrace\\test-data\\design.eapx",
+	"comments_regex": [
+		{
+			"JAVA": "\/\/(.*)"
+		},
+		{
+			"C++": "\/\/(.*)"
+		}
+	],
+	"source": [
+		"C:\\Personal Files\\Jonathan\\Work\\github\\traceability\\speedtrace\\speedtrace\\test-data\\source"
+	]
 }

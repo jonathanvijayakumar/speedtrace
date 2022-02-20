@@ -4,13 +4,10 @@
 package speedtrace.design;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.sparx.Collection;
 import org.sparx.Diagram;
@@ -18,6 +15,7 @@ import org.sparx.Package;
 import org.sparx.Repository;
 
 import speedtrace.readers.IDesignReader;
+import speedtrace.readers.RegexHelper;
 
 /**
  * Enterprise Architect reader.
@@ -30,7 +28,7 @@ public class EADesignReader implements IDesignReader {
 
 	private File designFile;
 	private Repository repo;
-	private List<String> validationRegex;
+	private RegexHelper regexHelper;
 
 	/**
 	 * @param regexList
@@ -39,7 +37,7 @@ public class EADesignReader implements IDesignReader {
 	public EADesignReader(List<String> regexList) {
 		designFile = null;
 		repo = null;
-		validationRegex = regexList;
+		regexHelper = new RegexHelper(regexList);
 	}
 
 	@Override
@@ -81,32 +79,22 @@ public class EADesignReader implements IDesignReader {
 				Collection<Diagram> diagrams = pkg.GetDiagrams();
 
 				for (Diagram diagram : diagrams) {
-					requirementsSet.addAll(validateAndExtract(diagram.GetNotes()));
+					requirementsSet.addAll(regexHelper.getMatches(diagram.GetNotes()));
 				}
 			}
 		}
 		return requirementsSet;
 	}
 
-	/**
-	 * 
-	 * @param text
-	 * @return
-	 */
-	public List<String> validateAndExtract(String text) {
-
-		List<String> matchesList = new ArrayList<String>();
-
-		for (String requirementPattern : validationRegex) {
-
-			Pattern pattern = Pattern.compile(requirementPattern);
-			Matcher matcher = pattern.matcher(text);
-			while (matcher.find()) {
-				matchesList.add(matcher.group());
-			}
-		}
-
-		return matchesList;
+	@Override
+	public String read() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
+	public void openFileOrDir(String file) {
+		// TODO Auto-generated method stub
+		
+	}
 }

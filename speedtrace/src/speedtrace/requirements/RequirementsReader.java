@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -20,6 +18,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import speedtrace.readers.IExcelReader;
+import speedtrace.readers.RegexHelper;
 
 /**
  * @author jonathanvijayakumar
@@ -33,18 +32,18 @@ public class RequirementsReader implements IExcelReader {
 	 * where the requirements lie
 	 */
 	private HashMap<String, List<ExcelSheetData>> excelColumnData;
-	private List<String> validationRegex;
 	private List<Requirement> requirementsList;
 	private List<Cell> listOfCells;
+	private RegexHelper regexHelper;
 
 	/**
 	 * 
 	 */
 	public RequirementsReader() {
 		excelColumnData = new HashMap<String, List<ExcelSheetData>>();
-		validationRegex = new ArrayList<String>();
 		requirementsList = new ArrayList<Requirement>();
 		listOfCells = new ArrayList<Cell>();
+		regexHelper = new RegexHelper();
 	}
 
 	@Override
@@ -114,7 +113,7 @@ public class RequirementsReader implements IExcelReader {
 		for (Cell cell : listOfCells) {
 			String cellValue = cell.getStringCellValue();
 
-			String validatedString = validateAndExtract(cellValue);
+			String validatedString = regexHelper.getMatch(cellValue);
 
 			if (!validatedString.isEmpty()) {
 				requirementsList.add(new Requirement(validatedString));
@@ -133,30 +132,6 @@ public class RequirementsReader implements IExcelReader {
 		// TODO Auto-generated method stub
 
 	}
-
-//	@Override
-//	public void addFiles(List<String> filesAsStrings) {
-//
-//		for (String file : filesAsStrings) {
-//			File fileObject = new File(file);
-//			if (fileObject.exists() && !fileObject.isDirectory()) {
-//				files.add(fileObject);
-//			}
-//		}
-//	}
-
-//	@Override
-//	public void setFiles(List<String> filesAsStrings) {
-//
-//		files.clear();
-//
-//		for (String file : filesAsStrings) {
-//			File fileObject = new File(file);
-//			if (fileObject.exists() && !fileObject.isDirectory()) {
-//				files.add(fileObject);
-//			}
-//		}
-//	}
 
 	@Override
 	public void clearColumnData() {
@@ -177,23 +152,7 @@ public class RequirementsReader implements IExcelReader {
 
 	@Override
 	public void setRegexsForValidation(List<String> regexStrings) {
-		validationRegex.clear();
-		validationRegex.addAll(regexStrings);
-	}
-
-	@Override
-	public String validateAndExtract(String cellValue) {
-		for (String requirementPattern : validationRegex) {
-			if (cellValue.matches(requirementPattern)) {
-				Pattern pattern = Pattern.compile(requirementPattern);
-				Matcher matcher = pattern.matcher(cellValue);
-				if (matcher.find()) {
-					return matcher.group(0);
-				}
-			}
-		}
-
-		return "";
+		regexHelper.setRegexsForValidation(regexStrings);
 	}
 
 	@Override
@@ -206,7 +165,7 @@ public class RequirementsReader implements IExcelReader {
 	 * @return the validationRegex
 	 */
 	public List<String> getValidationRegex() {
-		return validationRegex;
+		return regexHelper.getRegexList();
 	}
 
 	/**
@@ -284,6 +243,18 @@ public class RequirementsReader implements IExcelReader {
 			return ID;
 		}
 
+	}
+
+	@Override
+	public String read() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void openFileOrDir(String file) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

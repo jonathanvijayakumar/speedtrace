@@ -48,6 +48,23 @@ public interface IFileReader {
 		return stream;
 	}
 
+	/**
+	 * 
+	 * @param file
+	 * @param isDir
+	 */
+	public void openFileOrDir(String file);
+	
+	/**
+	 * 
+	 * @param file
+	 */
 	public void open(String file);
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String read();
 
 }

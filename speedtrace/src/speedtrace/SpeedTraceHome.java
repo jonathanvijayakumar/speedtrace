@@ -1,9 +1,12 @@
 package speedtrace;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import speedtrace.design.EADesignReader;
 import speedtrace.requirements.RequirementsReader;
+import speedtrace.source.SourceReader;
 
 /**
  * Class for reading Excel format requirements and processing them!
@@ -31,6 +34,8 @@ public class SpeedTraceHome {
 		 */
 		Set<String> requirementsFromDesign = readRequirementsFromDesign();
 
+		readRequirementsFromSource();
+
 		/*
 		 * Traceability operation
 		 */
@@ -41,6 +46,19 @@ public class SpeedTraceHome {
 		for (String req : requirementsFromSpec) {
 			System.out.println(req);
 		}
+	}
+
+	private static void readRequirementsFromSource() {
+		List<String> sourcePaths = ConfigurationManager.readSourcePaths();
+		Map<String, String> commentsRegex = ConfigurationManager.readCommentsRegex();
+
+		SourceReader srcReader = new SourceReader();
+		srcReader.addFiles(sourcePaths);
+
+		srcReader.setRegexForLanguageSupport(commentsRegex);
+		srcReader.setRegexForRequirements(ConfigurationManager.readRegex());
+
+		System.out.println(srcReader.readRequirements());
 	}
 
 	/**

@@ -4,7 +4,9 @@
 package speedtrace;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,8 +27,7 @@ public class ConfigurationManager {
 	private static JSONObject jsonData = null;
 
 	/**
-	 * Function loads configuration as soon as the application is loaded in
-	 * memory
+	 * Function loads configuration as soon as the application is loaded in memory
 	 */
 	public static void readConfigFile(String filePath) {
 		try {
@@ -41,6 +42,24 @@ public class ConfigurationManager {
 
 	static String readDesignPath() {
 		return getAttrAsString("design");
+	}
+
+	/**
+	 * Reads the paths specified for source code
+	 * 
+	 * @return
+	 */
+	public static List<String> readSourcePaths() {
+		return readArray("source");
+	}
+
+	/**
+	 * Reads the different comments support regular expressions.
+	 * 
+	 * @return
+	 */
+	public static Map<String, String> readCommentsRegex() {
+		return readMap("comments_regex");
 	}
 
 	/**
@@ -86,8 +105,16 @@ public class ConfigurationManager {
 	 */
 	public static List<String> readRegex() {
 
+		return readArray("regex");
+	}
+
+	/**
+	 * @param key
+	 * @return
+	 */
+	public static List<String> readArray(String key) {
 		List<String> regexList = new ArrayList<String>();
-		JSONArray regexJSONData = jsonData.getJSONArray("regex");
+		JSONArray regexJSONData = jsonData.getJSONArray(key);
 
 		for (int regexIter = 0; regexIter < regexJSONData.length(); regexIter++) {
 			String regex = (String) regexJSONData.get(regexIter);
@@ -96,6 +123,25 @@ public class ConfigurationManager {
 		}
 
 		return regexList;
+	}
+
+	/**
+	 * @param key
+	 * @return
+	 */
+	public static Map<String, String> readMap(String key) {
+		Map<String, String> mapObject = new HashMap<String, String>();
+		JSONArray regexJSONData = jsonData.getJSONArray(key);
+
+		for (int regexIter = 0; regexIter < regexJSONData.length(); regexIter++) {
+			JSONObject obj = (JSONObject) regexJSONData.get(regexIter);
+			String keyStr = obj.keys().next();
+
+			String valueObj = obj.getString(keyStr);
+			mapObject.put(keyStr, valueObj);
+		}
+
+		return mapObject;
 	}
 
 	/**
